@@ -6,7 +6,7 @@
 
 *Privacy-first knowledge infrastructure for the sovereign AI stack*
 
-[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](LICENSE)
+[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
 [![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-blue.svg)](https://www.python.org/downloads/)
 [![Part of Crux Ecosystem](https://img.shields.io/badge/crux-ecosystem-orange)](https://github.com/crux-ecosystem)
 
@@ -87,7 +87,6 @@ derag audit --verify
 ### From Source (development)
 
 ```bash
-# Private repository — requires CruxLabx access
 git clone https://github.com/crux-ecosystem/de-rag.git
 cd de-rag
 pip install -e ".[dev]"
@@ -263,11 +262,11 @@ De-RAG/
 |---------|------|--------|
 | [MOL](https://github.com/crux-ecosystem/mol-lang) | Sovereign compute language | v1.1.0 |
 | **De-RAG** | Decentralized encrypted data layer | v0.1.0 |
-| [Neural Kernel](https://github.com/crux-ecosystem/Neural-Kernel-Showcase) | AI microkernel & orchestration | v0.1.0 |
-| [IntraMind](https://github.com/crux-ecosystem/IntraMind-Showcase) | Campus RAG showcase | Pre-production |
+| [Neural Kernel](https://github.com/crux-ecosystem/neural-kernel) | AI microkernel & orchestration | v0.1.0 |
+| [IntraMind](https://github.com/crux-ecosystem/IntraMind) | Offline-first RAG engine | v1.1.0 |
 
 ## License
 
-Proprietary — All rights reserved.
+AGPL-3.0 — See [LICENSE](LICENSE) for details.
 
 **Copyright (c) 2026 CruxLabx**
