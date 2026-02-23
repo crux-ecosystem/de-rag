@@ -263,7 +263,7 @@ De-RAG/
 | [MOL](https://github.com/crux-ecosystem/mol-lang) | Sovereign compute language | v1.1.0 |
 | **De-RAG** | Decentralized encrypted data layer | v0.1.0 |
 | [Neural Kernel](https://github.com/crux-ecosystem/neural-kernel) | AI microkernel & orchestration | v0.1.0 |
-| [IntraMind](https://github.com/crux-ecosystem/IntraMind) | Offline-first RAG engine | v1.1.0 |
+| [IntraMind](https://github.com/crux-ecosystem/IntraMind-Showcase) | Offline-first RAG engine | v1.1.0 |
 
 ## License
 
