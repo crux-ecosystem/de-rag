@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "de-rag"
-version = "0.1.0"
+version = "0.2.0"
 description = "Decentralized privacy-first RAG — encrypted, sharded, peer-to-peer knowledge retrieval"
 readme = "README.md"
 license = {text = "AGPL-3.0"}
@@ -44,13 +44,17 @@ dependencies = [
     "msgpack>=1.0",
     "blake3>=0.4",
     "xxhash>=3.4",
+    "fastapi>=0.109",
+    "uvicorn[standard]>=0.27",
+    "python-multipart>=0.0.6",
 ]
 
 [project.optional-dependencies]
 p2p = ["libp2p>=0.2", "multiaddr>=0.0.9"]
 llm = ["ollama>=0.1", "httpx>=0.25"]
 mol = ["mol-lang>=1.1"]
-full = ["de-rag[p2p,llm,mol]"]
+api = ["fastapi>=0.109", "uvicorn[standard]>=0.27", "python-multipart>=0.0.6"]
+full = ["de-rag[p2p,llm,mol,api]"]
 dev = [
     "pytest>=7.4",
     "pytest-asyncio>=0.23",

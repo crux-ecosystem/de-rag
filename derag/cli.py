@@ -28,6 +28,7 @@ from typing import Optional
 
 import click
 
+from derag import __version__
 
 def _run(coro):
     """Run async coroutine from sync context."""
@@ -439,15 +440,40 @@ def shards_distribute(ctx, doc_id: str):
 @cli.command()
 @click.option("--host", default="127.0.0.1", help="Bind host")
 @click.option("--port", "-p", default=8420, help="HTTP port")
+@click.option("--token", envvar="DERAG_API_TOKEN", default=None,
+              help="Bearer auth token (or set DERAG_API_TOKEN)")
+@click.option("--rate-limit", default=100, help="Max requests per minute")
+@click.option("--workers", default=1, help="Uvicorn workers")
+@click.option("--reload", is_flag=True, help="Auto-reload on code changes")
 @click.pass_context
-def serve(ctx, host: str, port: int):
-    """Start HTTP API server."""
-    data_dir = ctx.obj["data_dir"]
-    password = click.prompt("Node password", hide_input=True)
+def serve(ctx, host: str, port: int, token: str, rate_limit: int,
+          workers: int, reload: bool):
+    """Start De-RAG HTTP API server."""
+    import os
+    import uvicorn
+    from derag.api.server import DeRAGAPI
 
-    click.echo(f"Starting De-RAG API at http://{host}:{port}")
-    click.echo("(API server module not yet implemented — coming in v0.2.0)")
-    # TODO: Launch FastAPI server
+    data_dir = ctx.obj["data_dir"]
+
+    # Set env vars so the default app picks them up
+    os.environ["DERAG_DATA_DIR"] = data_dir
+    if token:
+        os.environ["DERAG_API_TOKEN"] = token
+
+    click.echo(f"De-RAG v{__version__} API starting at http://{host}:{port}")
+    click.echo(f"  data_dir : {data_dir}")
+    click.echo(f"  auth     : {'enabled' if token else 'disabled'}")
+    click.echo(f"  rate_limit: {rate_limit} req/min")
+    click.echo(f"  docs     : http://{host}:{port}/docs")
+
+    uvicorn.run(
+        "derag.api.server:app",
+        host=host,
+        port=port,
+        workers=workers,
+        reload=reload,
+        log_level="info",
+    )
 
 
 # ─── Entry point ──────────────────────────────────────────────

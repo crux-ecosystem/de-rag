@@ -208,7 +208,13 @@ class EnvelopeEngine:
     Thread-safety: Each operation is stateless after init. Safe for concurrent use.
     """
 
-    def __init__(self, key_material: KeyMaterial):
+    def __init__(self, key_material):
+        if isinstance(key_material, str):
+            # Convenience: accept password string and derive keys
+            obj = self.__class__.from_password(key_material)
+            self._km = obj._km
+            self._kek_cipher = obj._kek_cipher
+            return
         self._km = key_material
         self._kek_cipher = AESGCM(bytes(key_material.kek))
 
@@ -262,7 +268,7 @@ class EnvelopeEngine:
 
     # --- Core Operations ---
 
-    def encrypt(self, plaintext: bytes, document_id: str) -> EncryptedBlob:
+    def encrypt(self, plaintext: bytes, document_id: str = "") -> EncryptedBlob:
         """
         Encrypt plaintext using envelope encryption.
         

@@ -45,14 +45,16 @@ _EXP_TABLE = [0] * 512
 _LOG_TABLE = [0] * 256
 
 def _init_gf_tables() -> None:
-    """Initialize GF(2^8) exp and log lookup tables."""
+    """Initialize GF(2^8) exp and log lookup tables using generator 3."""
     x = 1
     for i in range(255):
         _EXP_TABLE[i] = x
         _LOG_TABLE[x] = i
-        x <<= 1
-        if x & 0x100:
-            x ^= _GF_POLY
+        # Multiply x by generator 3: x*3 = xtime(x) ^ x
+        t = x << 1
+        if t & 0x100:
+            t ^= _GF_POLY
+        x = t ^ x
     # Fill upper half of exp table for convenience
     for i in range(255, 512):
         _EXP_TABLE[i] = _EXP_TABLE[i - 255]
@@ -81,6 +83,27 @@ def gf_div(a: int, b: int) -> int:
     if a == 0:
         return 0
     return _EXP_TABLE[(_LOG_TABLE[a] + 255 - _LOG_TABLE[b]) % 255]
+
+
+class GF256:
+    """
+    Convenience wrapper around GF(2^8) arithmetic functions.
+
+    Provides static methods for tests and external code that expects
+    a class-based API.
+    """
+
+    @staticmethod
+    def multiply(a: int, b: int) -> int:
+        return gf_mul(a, b)
+
+    @staticmethod
+    def inverse(a: int) -> int:
+        return gf_inv(a)
+
+    @staticmethod
+    def divide(a: int, b: int) -> int:
+        return gf_div(a, b)
 
 
 # ---------------------------------------------------------------------------

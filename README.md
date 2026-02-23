@@ -177,6 +177,55 @@ Tamper with any entry → chain breaks → detected immediately.
 
 ---
 
+## HTTP API (v0.2.0)
+
+De-RAG ships a full REST API built on FastAPI. Start it via CLI or import directly:
+
+```bash
+# Via CLI
+derag serve --host 0.0.0.0 --port 8420 --token MY_SECRET
+
+# Or via Python
+from derag.api.server import create_app
+app = create_app(data_dir="/var/derag", auth_token="MY_SECRET")
+```
+
+### Endpoints
+
+| Method | Path | Description |
+|--------|------|-------------|
+| `GET` | `/health` | Health check |
+| `POST` | `/init` | Initialize node with master password |
+| `GET` | `/status` | Node stats (docs, chunks, vectors, peers) |
+| `POST` | `/shutdown` | Graceful shutdown |
+| `GET` | `/documents` | List all documents |
+| `POST` | `/documents` | Ingest text content |
+| `POST` | `/documents/upload` | Upload file (multipart) |
+| `GET` | `/documents/{id}` | Get document metadata |
+| `DELETE` | `/documents/{id}` | Delete document |
+| `GET` | `/documents/{id}/chunks` | List chunks |
+| `POST` | `/query` | Full RAG query (search + generate) |
+| `POST` | `/search` | Similarity search only |
+| `POST` | `/network/join` | Join P2P network |
+| `GET` | `/network/peers` | List connected peers |
+| `POST` | `/shards/{doc_id}` | Distribute shards to peers |
+| `GET` | `/keys` | Key metadata (never exposes material) |
+| `POST` | `/keys/rotate` | Rotate master key |
+| `GET` | `/audit` | Query audit log |
+| `GET` | `/audit/verify` | Verify Merkle chain integrity |
+| `GET` | `/admin/dashboard` | Full admin dashboard |
+
+Interactive OpenAPI docs at `http://localhost:8420/docs`.
+
+### Security
+
+- **Bearer token authentication** with constant-time HMAC comparison
+- **Rate limiting** (100 req/min default, per-IP sliding window)
+- **CORS** configurable
+- **Request logging** with latency tracking
+
+---
+
 ## MOL Language Integration
 
 De-RAG pipelines can be defined in the [MOL language](https://github.com/crux-ecosystem/mol-lang), the sovereign compute layer of the Crux ecosystem:
@@ -213,7 +262,7 @@ De-RAG is **Phase 2** of a three-layer sovereign AI infrastructure:
 | Project | Role | Status |
 |---------|------|--------|
 | [MOL](https://github.com/crux-ecosystem/mol-lang) | Sovereign compute language | v1.1.0 |
-| **De-RAG** | Decentralized encrypted data layer | v0.1.0 |
+| **De-RAG** | Decentralized encrypted data layer | v0.2.0 |
 | [Neural Kernel](https://github.com/crux-ecosystem/neural-kernel) | AI microkernel & orchestration | v0.1.0 |
 | [IntraMind](https://github.com/crux-ecosystem/IntraMind-Showcase) | Offline-first RAG engine | v1.1.0 |
 
@@ -222,7 +271,7 @@ De-RAG is **Phase 2** of a three-layer sovereign AI infrastructure:
 ## Roadmap
 
 - [x] **v0.1.0** — Core engine: envelope encryption, key management, Shamir SSS, SSE, P2P protocol, BLAKE3 audit, MOL bridge
-- [ ] **v0.2.0** — HTTP API server (FastAPI), admin dashboard
+- [x] **v0.2.0** — HTTP API server (FastAPI), admin dashboard, 78 tests passing
 - [ ] **v0.3.0** — Neural Kernel agent integration (capability-gated RAG operations)
 - [ ] **v0.4.0** — Multi-modal support (images, audio, video)
 - [ ] **v0.5.0** — Homomorphic encryption for compute-on-encrypted-data

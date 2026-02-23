@@ -26,6 +26,7 @@ Copyright (c) 2026 CruxLabx
 
 from __future__ import annotations
 
+import enum
 import json
 import os
 import secrets
@@ -34,6 +35,16 @@ import time
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
+
+
+class KeyPurpose(str, enum.Enum):
+    """Enumeration of key purposes in the key hierarchy."""
+    DEK = "dek"
+    SHARD = "shard"
+    SEARCH = "search"
+    IDENTITY = "identity"
+    PEER = "peer"
+    MASTER = "master"
 
 from cryptography.hazmat.primitives.asymmetric.ed25519 import Ed25519PrivateKey
 from cryptography.hazmat.primitives.asymmetric.x25519 import X25519PrivateKey
