@@ -250,6 +250,8 @@ Reach out, open an issue, or start a discussion. The best ideas come from people
 
 <div align="center">
 
+**Creator:** Mounesh Kodi
+
 **Copyright © 2026 CruxLabx**
 
 *Sovereign AI infrastructure — because your data should answer only to you.*
