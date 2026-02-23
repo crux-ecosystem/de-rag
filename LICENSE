@@ -1,16 +1,15 @@
-                    GNU AFFERO GENERAL PUBLIC LICENSE
-                       Version 3, 19 November 2007
+Copyright (c) 2026 CruxLabx. All rights reserved.
 
- Copyright (C) 2026 CruxLabx
+PROPRIETARY SOFTWARE LICENSE
 
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+This software and associated documentation files (the "Software") are the
+proprietary and confidential property of CruxLabx. Unauthorized copying,
+modification, distribution, or use of this Software, via any medium, is
+strictly prohibited.
 
-                            Preamble
+The Software is provided under a proprietary license. No part of this Software
+may be reproduced, distributed, or transmitted in any form or by any means,
+including photocopying, recording, or other electronic or mechanical methods,
+without the prior written permission of CruxLabx.
 
-  The GNU Affero General Public License is a free, copyleft license for
-software and other kinds of works, specifically designed to ensure
-cooperation with the community in the case of network server software.
-
-  The full text of this license is available at:
-  https://www.gnu.org/licenses/agpl-3.0.txt
+For licensing inquiries: https://github.com/crux-ecosystem
