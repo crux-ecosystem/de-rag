@@ -1,0 +1,92 @@
+[build-system]
+requires = ["setuptools>=68.0", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "de-rag"
+version = "0.1.0"
+description = "Decentralized privacy-first RAG — encrypted, sharded, peer-to-peer knowledge retrieval"
+readme = "README.md"
+license = {text = "AGPL-3.0"}
+requires-python = ">=3.10"
+authors = [
+    {name = "Mounesh Kodi", email = "ops@cruxlabx.dev"},
+]
+keywords = [
+    "rag", "decentralized", "privacy", "encryption", "p2p",
+    "ai", "vector-search", "sovereign-ai", "federated",
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: GNU Affero General Public License v3",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Security :: Cryptography",
+    "Topic :: System :: Distributed Computing",
+]
+dependencies = [
+    "cryptography>=42.0",
+    "numpy>=1.26",
+    "faiss-cpu>=1.7",
+    "sentence-transformers>=2.2",
+    "pydantic>=2.0",
+    "pydantic-settings>=2.0",
+    "click>=8.1",
+    "rich>=13.0",
+    "asyncio-mqtt>=0.16",
+    "aiofiles>=23.0",
+    "msgpack>=1.0",
+    "blake3>=0.4",
+    "xxhash>=3.4",
+]
+
+[project.optional-dependencies]
+p2p = ["libp2p>=0.2", "multiaddr>=0.0.9"]
+llm = ["ollama>=0.1", "httpx>=0.25"]
+mol = ["mol-lang>=1.1"]
+full = ["de-rag[p2p,llm,mol]"]
+dev = [
+    "pytest>=7.4",
+    "pytest-asyncio>=0.23",
+    "pytest-cov>=4.1",
+    "mypy>=1.8",
+    "ruff>=0.2",
+]
+
+[project.scripts]
+derag = "derag.cli:main"
+
+[project.urls]
+Homepage = "https://github.com/crux-ecosystem/de-rag"
+Documentation = "https://de-rag.cruxlabx.dev"
+Repository = "https://github.com/crux-ecosystem/de-rag"
+Issues = "https://github.com/crux-ecosystem/de-rag/issues"
+
+[tool.setuptools.packages.find]
+include = ["derag*"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "S", "B", "A", "C4", "PT"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+    "slow: marks tests as slow",
+    "network: marks tests requiring network",
+    "crypto: marks cryptography tests",
+]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true

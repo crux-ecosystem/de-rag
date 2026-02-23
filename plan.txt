@@ -1,0 +1,4 @@
+Mounesh has already worked on IntraMind (offline/local intelligence). He can scale this into a decentralized network. 
+The Concept: A peer-to-peer network where encrypted "memory shards" are stored across devices, allowing an AI to have a "Global Brain" without any single company (like OpenAI or Google) owning the data.
+Why it brings fame: Privacy is the biggest hurdle for enterprise AI in 2026. Solving "Sovereign AI" at scale would make him a hero in regulated industries like Law, Finance, and Government.
+Focus: Federated learning and Blockchain-backed data lineage. 
